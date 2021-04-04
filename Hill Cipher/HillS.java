@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
-// import java.lang.String.*;
 
 public class HillS {
     public static void main(String args[]) {
@@ -11,13 +10,14 @@ public class HillS {
             BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
             Scanner in = new Scanner(System.in);
 
-            // System.out.println("Enter Message : ");
-            // String plainText = bf.readLine();
-            String plainText = "ACTP";
+            System.out.println("Enter Message : ");
+            String plainText = bf.readLine();
+            // String plainText = "friday";
             String cipherText = "";
-            int i, j, k = 0, n = 2, l;
+            int i, j, k = 0, n = 3, l;
+            plainText = plainText.toUpperCase();
             System.out.println("Key matrix length : ");
-            // n = in.nextInt();
+            n = in.nextInt();
             if (plainText.length() % n != 0) {
                 if (n == 2) {
                     plainText += 'X';
@@ -35,7 +35,10 @@ public class HillS {
             for (int[] row : result) {
                 Arrays.fill(row, 0);
             }
-            String key = "GYBNQKURP";
+            // String key = "RRFVSVCCT";
+            // String key = "HILL";
+            // String key = "GYBNQKURP";
+            String key = "HITD";
             for (i = 0; i < n; i++) {
                 for (j = 0; j < n; j++) {
                     keyarr[i][j] = key.charAt(k++) % 65;
@@ -47,35 +50,27 @@ public class HillS {
                     vector[i][j] = plainText.charAt(k++) % 65;
                 }
             }
-            // for (i = 0; i < n; i++) {
-            // for (j = 0; j < n; j++) {
-            // System.out.println(keyarr[i][j]);
-            // }
-            // }
-            // System.out.println("vector");
-            // for (i = 0; i < plainText.length() / n; i++) {
-            // for (j = 0; j < plainText.length(); j++) {
-            // System.out.println(vector[i][j]);
-            // }
-            // }
+            for (i = 0; i < n; i++) {
+                for (j = 0; j < n; j++) {
+                    System.out.print(keyarr[i][j] + " ");
+                }
+                System.out.println();
+            }
             for (i = 0; i < (plainText.length() / n); i++) {
                 l = 0;
                 for (j = 0; j < n; j++) {
                     for (k = 0; k < n; k++) {
-                        // System.out.println((keyarr[j][k] * vector[i][k]));
                         result[i][l] += (keyarr[j][k] * vector[i][k]);
-
                     }
                     l++;
                 }
             }
             for (i = 0; i < plainText.length() / n; i++) {
                 for (j = 0; j < n; j++) {
-                    // System.out.println(result[i][j]);
                     cipherText += (char) (result[i][j] % 26 + 65);
                 }
             }
-            System.out.println(cipherText);
+            System.out.println("Cipher Text : " + cipherText);
 
             dou.writeUTF(cipherText);
             dou.writeUTF(key);
